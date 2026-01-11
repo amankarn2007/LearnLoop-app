@@ -27,7 +27,7 @@ module.exports.createUser = async (req, res) => {
         res.send(user);
     
         let token = genrateToke(user);
-        res.cookies = ("token", token); //set the jwt token in cookies
+        res.cookie("token", token); //set the jwt token in cookies
     } catch(err){
         console.log("error in creating user, try again...");
     }
@@ -41,22 +41,30 @@ module.exports.renderLoginForm = (req, res) => {
 module.exports.loginUser = async (req, res) => {
     const { email, password } = req.body;
 
-    const user = await userModel.findOne({ email: email }); //user finded
-    //console.log(user);
-
-    try{
-        bcrypt.compare(password, user.password, function(err, result) {
-            if(result){
-                //set the jwt token and render on dashboard
-                let token = genrateToke(user);
-                res.cookies = ("token", token);
     
-                console.log("successful login");
-                res.send(token);
-            }
-            else res.send("user cannot login");
-        });
+    try{
+        const user = await userModel.findOne({ email: email }); //user finded
+        //console.log(user);
+        if(!user) return res.json({message: "can't find user"});
+
+        const isCorrect = bcrypt.compare(password, user.password);
+
+        if(isCorrect){
+            //set the jwt token and render on dashboard
+            let token = genrateToke(user);
+            res.cookie("token", token);
+
+            console.log("successful login");
+            res.send(token);
+        }
+        
+        return res.send("user cannot login");
+
     } catch(err){
         console.log("login failed, try agin...");
     }
+}
+
+module.exports.showUserCourses = async (req, res) => {
+    res.json({message: "all courses"});
 }

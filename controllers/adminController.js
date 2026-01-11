@@ -10,7 +10,7 @@ module.exports.renderSigningFrom = (req, res) => {
 module.exports.createAdmin = async (req, res) => {
     const {email, password, firstName, lastName} = req.body;
 
-    const Admin = adminModel.findOne({email: email});
+    const Admin = await adminModel.findOne({email: email});
     if(Admin) return res.json({messasge: "admin already exists"});
 
     const salt = await bcrypt.genSalt(10);
@@ -26,7 +26,7 @@ module.exports.createAdmin = async (req, res) => {
         res.send(admin);
 
         const token = genrateToke(admin);
-        res.cookies = ("admin_token", token);
+        res.cookie("admin_token", token);
     } catch(err){
         console.log(err);
     }
@@ -48,13 +48,13 @@ module.exports.loginUser = async (req, res) => {
 
         if(isCorrect){
             const token = genrateToke(admin);
-            res.cookies = ("admin_token", token);
+            res.cookie("admin_token", token);
 
-            res.json({message: "admin loggin successful", cookies: res.cookies});
+            res.send(token);
         };
-        res.json({message: "error in admin loggin"});
+        return res.json({message: "error in admin loggin"});
 
     } catch(err){
-        console.log("error in Admin login");
+        return console.log("error in Admin login");
     }
 }

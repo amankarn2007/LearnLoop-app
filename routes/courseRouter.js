@@ -1,13 +1,16 @@
 const express = require("express");
 const router = express.Router();
 const courseController = require("../controllers/courseController");
+const isAdmin = require("../middlewares/isAdmin");
 
 router
-    .route("/show")
+    .route("/")
     .get(courseController.showAllCourses)
+    
 
 router
     .route("/create")
-    .post(courseController.createCoures);
+    .post(isAdmin, courseController.createCourse) 
+
 
 module.exports = router;

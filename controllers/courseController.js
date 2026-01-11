@@ -4,7 +4,7 @@ module.exports.showAllCourses = (req, res) => {
     res.send("course controller");
 }
 
-module.exports.createCoures = async (req, res) => {
+module.exports.createCourse = async (req, res) => {
     const {title, description, price} = req.body;
 
     const newCourse = await courseModel.create({

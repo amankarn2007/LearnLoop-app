@@ -11,3 +11,11 @@ const genrateToke = function(user){
 }
 
 module.exports = genrateToke;
+
+//sign karte time ham jo details bhejenge, usi se token genrate hoga. ham yaha jo detail's dalenge ham usi ko "sirf" access kar payenge "middilewares" me.
+//agar token me jyada detail's hoga to ham use middileware ke through access karke use use kar skte hai.
+
+//# Summary:
+//Privacy: JWT mein sensitive data (Password, Address) kabhi mat daalo.
+//Size: Token ko chota rakho taaki request fast ho.
+//Freshness: Zarurat padne par ID ka use karke DB se fresh data nikalo.

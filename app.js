@@ -5,6 +5,7 @@ require("dotenv").config(); //to acceses env file, should be before db connectio
 require("./config/mongooseConnection"); //database connection
 const path = require("path");
 const ejs = require("ejs");
+const cookie = require("cookie-parser"); //to use cookies in controller
 
 const indexRouter = require("./routes/indexRouter");
 const userRouter= require("./routes/userRouter");
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
+app.use(cookie());
 
 //app.get("/", (req, res) => {
 //    res.json("hi");
