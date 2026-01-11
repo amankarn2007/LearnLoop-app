@@ -1,5 +1,3 @@
-
-
-module.exports.renderSigningFrom = (req, res) => {
-    res.send("adfds");
+module.exports.showHome = (req, res) => {
+    res.render("index.ejs")
 }

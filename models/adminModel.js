@@ -4,11 +4,11 @@ const Schema = mongoose.Schema;
 const adminSchema = new Schema({
     email: String,
     password: String,
-    firstname: {
+    firstName: {
         type: String,
         minLength: 3,
     },
-    lastname: {
+    lastName: {
         type: String,
         minLength: 3,
     },

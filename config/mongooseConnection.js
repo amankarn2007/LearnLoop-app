@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const uri = "mongodb://127.0.0.1:27017/LearnLoop";
+const uri = process.env.MONGO_URL;
 
 async function connectDB(){
     try{

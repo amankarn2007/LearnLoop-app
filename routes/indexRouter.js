@@ -4,7 +4,7 @@ const indexController = require("../controllers/indexController");
 
 router
     .route("/")
-    .get(indexController.renderSigningFrom)
+    .get(indexController.showHome)
 
 
-module.exports = router;
+module.exports = router;2

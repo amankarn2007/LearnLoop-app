@@ -6,4 +6,8 @@ router
     .route("/show")
     .get(courseController.showAllCourses)
 
+router
+    .route("/create")
+    .post(courseController.createCoures);
+
 module.exports = router;
